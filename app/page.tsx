@@ -7,7 +7,7 @@ export default async function Home() {
     const type = "PAGE"
     let data = undefined
 
-    let page: GetPage | undefined = undefined;
+    // let page: GetPage | undefined = undefined;
 
 
 
@@ -26,12 +26,12 @@ export default async function Home() {
 
 
         if (!response.ok) {
-            page = undefined
+            // page = undefined
             throw new Error("Network response was not ok");
         }
         data = await response.json() as GetPage;
 
-        page = data
+        // page = data
     } catch (err) {
         console.error(err)
     }

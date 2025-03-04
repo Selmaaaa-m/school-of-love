@@ -7,7 +7,7 @@ export default async function News() {
     const url = "news"
     const type = "POST"
     let data = undefined
-    let page: GetPost | undefined
+    // let page: GetPost | undefined
 
     try {
         const response = await fetch(
@@ -19,11 +19,11 @@ export default async function News() {
         
 
         if (!response.ok) {
-            page = undefined
+            // page = undefined
             throw new Error("Network response was not ok");
         }
         data = await response.json() as GetPost;
-        page = data
+        // page = data
         
     } catch (err) {
         console.error(err)

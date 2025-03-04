@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import angle from './icons/angle.svg'
+import { ListItemProps } from './types';
 
 const ListItem: React.FC<ListItemProps> = ({ text, subText, dotted }) => {
     return (

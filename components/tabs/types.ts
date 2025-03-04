@@ -3,7 +3,7 @@ interface Tab {
     content: string;
 }
 
-interface TabsProps {
+export interface TabsProps {
     tabs: Tab[];
     activeTab: number;
     setActiveTab: (index: number) => void;

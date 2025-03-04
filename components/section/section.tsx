@@ -1,4 +1,5 @@
 import ListItem from "../listItem/listItem";
+import { SectionProps } from "./types";
 
 const Section: React.FC<SectionProps> = ({ title, items, dotted }) => {
     return (

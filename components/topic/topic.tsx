@@ -1,8 +1,9 @@
 import Image from "next/image";
 import calender from './icons/calender.svg';
 import comment from './icons/comment.svg';
+import { TopicProps } from "./types";
 
-const Topic: React.FC<TopicProps> = ({ title, date, commentCount, detail }) => {
+const Topic: React.FC<TopicProps> = ({ title, date, commentCount }) => {
     return (
         <div className="w-full text-center pt-[65px] flex flex-col justify-start items-center gap-5">
 

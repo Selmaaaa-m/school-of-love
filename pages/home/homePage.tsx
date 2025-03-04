@@ -7,8 +7,6 @@ import News from "@/features/news/news";
 import Questions from "@/features/questions/questions";
 import Supporters from "@/features/supporters/supporters";
 import { Props } from "./types";
-import { GetPost } from "@/api/getPost";
-
 export default async function HomePage(data: Props) {
     const pageData = data.data
 

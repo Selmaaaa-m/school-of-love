@@ -1,4 +1,4 @@
-interface TopicProps {
+export interface TopicProps {
     title: string;
     date: string;
     commentCount: number;

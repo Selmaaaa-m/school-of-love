@@ -1,8 +1,8 @@
 "use client";
 import { useState } from 'react';
 import Tabs from "@/components/tabs/tabs";
-import tabs from './tabsData';
-import { Props } from './types';
+// import tabs from './tabsData';
+import { Props, Tab } from './types';
 
 export default function MainEvents({ values }: Props) {
     const [activeTab, setActiveTab] = useState(0);

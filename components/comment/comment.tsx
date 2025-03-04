@@ -1,3 +1,4 @@
+import { CommentProps } from "./types";
 
 
 export default function Comment({ name, date, content }: CommentProps) {

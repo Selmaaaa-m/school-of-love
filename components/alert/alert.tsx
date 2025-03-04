@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import {AlertProps} from './types'
 
 export default function Alert({ message, onClose }: AlertProps) {
     useEffect(() => {

@@ -1,4 +1,4 @@
-interface AlertProps {
+export interface AlertProps {
     message: string;
     onClose: () => void;
 }

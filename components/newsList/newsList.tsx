@@ -1,6 +1,5 @@
 "use client";
 
-import { StaticImageData } from "next/image";
 import { useState } from "react";
 import NewsItem from "../newsItem/newsItem";
 import { NewsListProps } from "./types";

@@ -1,6 +1,7 @@
+import { TabsProps } from "./types";
 
 
-const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, setActiveTab, fade, setFade }) => {
+const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, setActiveTab, setFade }) => {
     const handleTabClick = (index: number) => {
         setFade(true);
         setTimeout(() => {

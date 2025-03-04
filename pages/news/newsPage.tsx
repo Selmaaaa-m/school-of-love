@@ -1,7 +1,7 @@
 import Topic from "@/components/topic/topic";
-import Image from "next/image";
-import newsPic from "@/public/images/news/newsPic.png";
-import { paragraphs } from "./paragraphs";
+// import Image from "next/image";
+// import newsPic from "@/public/images/news/newsPic.png";
+// import { paragraphs } from "./paragraphs";
 import CommentSection from "@/features/commentSection/commentSection";
 import Footer from "@/features/footer/footer";
 import { Data } from "./types";
@@ -11,7 +11,7 @@ export default function NewsPage(data: Data) {
 
     const date = "۱۴۰۲/۰۴/۱۰";
     const commentCount = 12;
-    const title = "روایتگری ابزار قدرتمند مقابله با جنگ نرم دشمن است";
+    // const title = "روایتگری ابزار قدرتمند مقابله با جنگ نرم دشمن است";
     const detail = "معاون فرهنگی هنری سازمان بسیج مستضعفین گفت: امروز دشمن در حال جنگیدن با ما از طریق رسانه‌ها و فضای مجازی است؛ جنگی که به‌طور مستقیم بر افکار و اندیشه‌های مردم تأثیر می‌گذارد و روایتگری ابزاری قدرتمند برای مقابله با این جنگ نرم است.";
 
     return (

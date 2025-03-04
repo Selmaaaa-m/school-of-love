@@ -1,6 +1,6 @@
-interface Tab {
+export interface Tab {
     title: string;
-    content: JSX.Element;
+    content: string;
 }
 
 import { GetPage } from "@/api/getPage";

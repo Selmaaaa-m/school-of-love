@@ -14,20 +14,18 @@ export interface Props {
 }
 
 export default function HomePage({ data }: Props) {
-    if (!data) {
-        return <div>Loading...</div>;
-    }
+
     const pageData = data;
 
     return (
         <>
             <Logo />
-            <Questions values={pageData} />
-            <Festival values={pageData} />
-            <FestivalHighlights values={pageData} />
-            <MainEvents values={pageData} />
-            <Supporters values={pageData} />
-            <News values={pageData} />
+            <Questions values={pageData || undefined} />
+            <Festival values={pageData || undefined} />
+            <FestivalHighlights values={pageData || undefined} />
+            <MainEvents values={pageData || undefined} />
+            <Supporters values={pageData || undefined} />
+            <News values={pageData || undefined} />
             <Footer />
         </>
     );

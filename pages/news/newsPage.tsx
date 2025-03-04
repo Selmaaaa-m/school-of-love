@@ -4,7 +4,12 @@ import Topic from "@/components/topic/topic";
 // import { paragraphs } from "./paragraphs";
 import CommentSection from "@/features/commentSection/commentSection";
 import Footer from "@/features/footer/footer";
-import { Data } from "./types";
+
+import { GetPost } from "@/api/getPost";
+
+export interface Data {
+    data : GetPost | undefined
+}
 
 export default function NewsPage(data: Data) {
 

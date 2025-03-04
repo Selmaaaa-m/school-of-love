@@ -6,7 +6,14 @@ import MainEvents from "@/features/mainEvents/mainEvents";
 import News from "@/features/news/news";
 import Questions from "@/features/questions/questions";
 import Supporters from "@/features/supporters/supporters";
-import { Props } from "./types";
+
+
+import { GetPage } from "@/api/getPage"
+
+export interface Props {
+    data: GetPage | undefined
+}
+
 export default async function HomePage(data: Props) {
     const pageData = data.data
 

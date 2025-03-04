@@ -2,7 +2,13 @@ import pic1 from "@/public/images/news/pic1.png";
 import pic2 from "@/public/images/news/pic2.png";
 import pic3 from "@/public/images/news/pic3.png";
 import NewsList from "@/components/newsList/newsList";
-import { Props } from "./types";
+// import { Props } from "./types";
+
+import { GetPage } from "@/api/getPage";
+
+export interface Props {
+    values: GetPage | undefined
+}
 
 export default function News({values}: Props) {
 

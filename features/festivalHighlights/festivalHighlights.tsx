@@ -1,11 +1,8 @@
 "use client";
 import { useRef, useEffect } from 'react';
 import FestivalInfoCard from "@/components/festivalInfoCard/festivalInfoCard";
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Props } from './types';
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function FestivalHighlights({values} : Props) {
     const containerRef = useRef<HTMLDivElement>(null);

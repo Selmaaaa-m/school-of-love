@@ -2,8 +2,9 @@ import pic1 from "@/public/images/news/pic1.png";
 import pic2 from "@/public/images/news/pic2.png";
 import pic3 from "@/public/images/news/pic3.png";
 import NewsList from "@/components/newsList/newsList";
+import { Props } from "./types";
 
-export default function News() {
+export default function News({values}: Props) {
     const allNewsItems = [
         {
             id: "1",

@@ -1,17 +1,34 @@
-export default function Questions() {
+// import { Props } from "./types";
+import { GetPage } from "@/api/getPage";
+
+export interface Props {
+    values: GetPage | undefined;
+}
+
+export default function Questions({ values }: Props) {
+
+    const questionsTitle = values?.data.keyValues.find(item => item.key === 'q-title');
+    const questionsOne = values?.data.keyValues.find(item => item.key === 'q1');
+    const questionsTwo = values?.data.keyValues.find(item => item.key === 'q2');
+
     const text = [
-        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
-        "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
+        questionsOne?.value || "",
+        questionsTwo?.value || "",
     ];
 
     return (
         <div className="w-full h-fit flex flex-col items-center gap-14 mt-40 px-[70px]" dir="rtl">
-            <h2 className="font-semibold text-[32px]/[56px] ">چرا مدرسه عشق؟</h2>
+            <div className="text-[32px]/[56px]" dangerouslySetInnerHTML={{ __html: questionsTitle?.value || "" }} />
             <div className="flex h-fit w-full gap-20">
-                {text.map((text, index) => (
-                    <p key={index} className="font-normal text-lg text-justify ">
-                        {text}
-                    </p>
+                {text.map((value, index) => (
+                    // <p key={index} className="font-normal text-lg text-justify">
+                    //     {value}
+                    // </p>
+                    <div
+                        key={index}
+                        className="font-normal text-lg text-justify"
+                        dangerouslySetInnerHTML={{ __html: value || "" }}
+                    />
                 ))}
             </div>
         </div>

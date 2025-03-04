@@ -1,8 +1,3 @@
-interface Tab {
-    title: string;
-    content: JSX.Element;
-}
-
 import { GetPage } from "@/api/getPage";
 
 export interface Props {

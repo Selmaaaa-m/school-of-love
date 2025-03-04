@@ -7,15 +7,17 @@ import News from "@/features/news/news";
 import Questions from "@/features/questions/questions";
 import Supporters from "@/features/supporters/supporters";
 
-
 import { GetPage } from "@/api/getPage"
 
 export interface Props {
-    data: GetPage | undefined
+    data: GetPage | undefined;
 }
 
-export default async function HomePage(data: Props) {
-    const pageData = data.data
+export default function HomePage({ data }: Props) {
+    if (!data) {
+        return <div>Loading...</div>;
+    }
+    const pageData = data;
 
     return (
         <>
@@ -28,5 +30,5 @@ export default async function HomePage(data: Props) {
             <News values={pageData} />
             <Footer />
         </>
-    )
+    );
 }

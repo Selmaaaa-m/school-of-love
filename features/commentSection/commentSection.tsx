@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useState, useRef, useEffect } from "react";
 import Comment from "@/components/comment/comment";
 import Alert from "@/components/alert/alert";
@@ -8,6 +8,8 @@ export default function CommentSection() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
+    const [postId, setPostId] = useState(0);  // Set the postId accordingly
+    const [parentId, setParentId] = useState(0);  // Set the parentId accordingly
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,17 +18,49 @@ export default function CommentSection() {
         setEmail(filteredValue);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (comment && name && email && emailRegex.test(email)) {
-            // Handle form submission logic here
-            console.log("Comment submitted:", { comment, name, email });
-            // Clear the form
-            setComment("");
-            setName("");
-            setEmail("");
-        } else {
-            setAlertMessage("لطفا همه فیلد ها را پر کنید و ایمیل معتبر وارد کنید.");
+
+        if (!comment || !name || !email) {
+            setAlertMessage("لطفا همه فیلد ها را پر کنید.");
+            return;
+        }
+
+        if (!emailRegex.test(email)) {
+            setAlertMessage("لطفا ایمیل معتبر وارد کنید.");
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/v1/client/web/createComment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    body: comment,
+                    postId: postId,
+                    parentId: parentId,
+                    name: name,
+                    email: email,
+                }),
+            });
+
+            if (response.ok) {
+                // Handle successful form submission
+                console.log("Comment submitted:", { comment, name, email });
+                // Clear the form
+                setComment("");
+                setName("");
+                setEmail("");
+                setAlertMessage(""); // Clear any previous alert message
+            } else {
+                // Handle error response
+                setAlertMessage("مشکلی در ارسال دیدگاه به وجود آمده است.");
+            }
+        } catch (error) {
+            console.error("Error submitting comment:", error);
+            setAlertMessage("مشکلی در ارسال دیدگاه به وجود آمده است.");
         }
     };
 

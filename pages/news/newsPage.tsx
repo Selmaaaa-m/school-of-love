@@ -7,8 +7,8 @@ import Footer from "@/features/footer/footer";
 import { Data } from "./types";
 
 export default function NewsPage(data: Data) {
-    // console.log("data from news: ", data);
-    
+
+
     const date = "۱۴۰۲/۰۴/۱۰";
     const commentCount = 12;
     const title = "روایتگری ابزار قدرتمند مقابله با جنگ نرم دشمن است";
@@ -17,8 +17,8 @@ export default function NewsPage(data: Data) {
     return (
         <>
             <div className="px-[142px] flex flex-col items-center justify-start">
-                <Topic title={title} date={date} commentCount={commentCount} detail={detail} />
-                <Image
+                <Topic title={data.data?.data.title || ''} date={date} commentCount={commentCount} detail={detail} />
+                {/* <Image
                     className=" mt-[30px] mb-[69px] "
                     src={newsPic}
                     alt={"تصویر خبر"}
@@ -26,10 +26,10 @@ export default function NewsPage(data: Data) {
                     height={720}
                     placeholder="blur"
                     blurDataURL="/path/to/placeholder-image.jpg"
-                />
+                /> */}
 
                 <div>
-                    {paragraphs.map((paragraph, index) => (
+                    {/* {paragraphs.map((paragraph, index) => (
                         <div key={index} className="mt-[45px]" dir="rtl">
                             <span className="font-bold text-base/[30px] text-right" dir="rtl">
                                 {paragraph.topic}
@@ -38,7 +38,13 @@ export default function NewsPage(data: Data) {
                                 {paragraph.content}
                             </p>
                         </div>
-                    ))}
+                    ))} */}
+
+                    <div
+                        dir="rtl"
+                        className="text-base/[30px]  text-justify mt-[40px]"
+                        dangerouslySetInnerHTML={{ __html: data.data?.data.htmlCode || "" }}
+                    />
                 </div>
 
                 <CommentSection />

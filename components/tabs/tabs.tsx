@@ -22,7 +22,8 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, setActiveTab, fade, setFad
                             }`}
                         onClick={() => handleTabClick(index)}
                     >
-                        {tab.title}
+                        <div className="" dangerouslySetInnerHTML={{ __html: tab.title || "" }} />
+
                     </button>
                 ))}
             </div>

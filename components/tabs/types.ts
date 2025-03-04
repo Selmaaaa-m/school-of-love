@@ -1,6 +1,6 @@
 interface Tab {
     title: string;
-    content: JSX.Element;
+    content: string;
 }
 
 interface TabsProps {

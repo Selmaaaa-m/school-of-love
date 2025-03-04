@@ -5,6 +5,9 @@ import NewsList from "@/components/newsList/newsList";
 import { Props } from "./types";
 
 export default function News({values}: Props) {
+
+    const newsTitle = values?.data.keyValues.find(item => item.key === 'news-title');
+
     const allNewsItems = [
         {
             id: "1",
@@ -40,10 +43,12 @@ export default function News({values}: Props) {
 
     return (
         <div className="w-full px-[42px] flex flex-col items-center">
-            <p className="font-semibold text-4xl/[63px]">
+            {/* <p className="font-semibold text-4xl/[63px]">
                 اخبار
                 <span className="text-customGreen"> جشنواره </span>
-            </p>
+            </p> */}
+            <div className="text-4xl/[63px]  " dangerouslySetInnerHTML={{ __html: newsTitle?.value || "" }} />
+
 
             <NewsList allNewsItems={allNewsItems} />
         </div>

@@ -1,4 +1,3 @@
-// import { Props } from "./types";
 import { GetPage } from "@/api/getPage";
 
 export interface Props {
@@ -21,9 +20,6 @@ export default function Questions({ values }: Props) {
             <div className="text-[32px]/[56px]" dangerouslySetInnerHTML={{ __html: questionsTitle?.value || "" }} />
             <div className="flex h-fit w-full gap-20">
                 {values ? text.map((value, index) => (
-                    // <p key={index} className="font-normal text-lg text-justify">
-                    //     {value}
-                    // </p>
                     <div
                         key={index}
                         className="font-normal text-lg text-justify"

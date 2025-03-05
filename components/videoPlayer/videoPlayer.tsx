@@ -3,8 +3,8 @@
 import React, { useRef, useEffect } from 'react';
 import styles from './videoPlayer.module.css';
 import { Props } from './types';
-import gsap from 'gsap'; // Static import
-import {ScrollTrigger} from 'gsap/ScrollTrigger'; // Static import
+import gsap from 'gsap';
+import {ScrollTrigger} from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +13,6 @@ export default function VideoPlayer({ video }: Props) {
     const fileUrl = video?.filesValue?.find(item => item.url)?.url;
 
     useEffect(() => {
-        // You don't need dynamic import here as gsap and ScrollTrigger are already imported statically
         if (typeof window !== "undefined") {
             const tl = gsap.timeline({
                 scrollTrigger: {

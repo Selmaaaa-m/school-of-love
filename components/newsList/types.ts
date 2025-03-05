@@ -1,5 +1,5 @@
-import { StaticImageData } from "next/image";
+import { GetPostList } from "@/api/getPostList";
 
 export interface NewsListProps {
-    allNewsItems: Array<{ id: string; imageSrc: StaticImageData; text: string }>;
+    allNewsItems: GetPostList | undefined
 }

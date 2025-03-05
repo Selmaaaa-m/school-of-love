@@ -13,8 +13,8 @@ export type KeyValues = {
     value: string;
     name: string;
     description: string;
-    createdAt: string; // Date-time as string
-    updatedAt: string; // Date-time as string
+    createdAt: string;
+    updatedAt: string;
     type: string;
     filesValue: FilesValue[];
 };
@@ -23,8 +23,8 @@ type Data = {
     id: number;
     title: string;
     url: string;
-    createdAt: string; // Date-time as string
-    updatedAt: string; // Date-time as string
+    createdAt: string;
+    updatedAt: string;
     keyValues: KeyValues[];
 };
 

@@ -1,58 +1,37 @@
 import Topic from "@/components/topic/topic";
-// import Image from "next/image";
-// import newsPic from "@/public/images/news/newsPic.png";
-// import { paragraphs } from "./paragraphs";
 import CommentSection from "@/features/commentSection/commentSection";
 import Footer from "@/features/footer/footer";
+import { convertToJalali } from "@/utils/dateUtils";
 
 import { GetPost } from "@/api/getPost";
+import { GetComments } from "@/api/getCommentList";
 
 export interface Data {
-    data : GetPost | undefined
+    newsData: GetPost | undefined
+    commentData: GetComments | undefined
 }
 
-export default function NewsPage(data: Data) {
+export default function NewsPage({ newsData, commentData }: Data) {
 
-
-    const date = "۱۴۰۲/۰۴/۱۰";
-    const commentCount = 12;
-    // const title = "روایتگری ابزار قدرتمند مقابله با جنگ نرم دشمن است";
+    const date = newsData?.data.createdAt ? convertToJalali(newsData.data.createdAt) : '';
+    const commentCount = commentData?.data.comment.length || 0;
     const detail = "معاون فرهنگی هنری سازمان بسیج مستضعفین گفت: امروز دشمن در حال جنگیدن با ما از طریق رسانه‌ها و فضای مجازی است؛ جنگی که به‌طور مستقیم بر افکار و اندیشه‌های مردم تأثیر می‌گذارد و روایتگری ابزاری قدرتمند برای مقابله با این جنگ نرم است.";
 
     return (
         <>
             <div className="px-[142px] flex flex-col items-center justify-start">
-                <Topic title={data.data?.data.title || ''} date={date} commentCount={commentCount} detail={detail} />
-                {/* <Image
-                    className=" mt-[30px] mb-[69px] "
-                    src={newsPic}
-                    alt={"تصویر خبر"}
-                    width={996}
-                    height={720}
-                    placeholder="blur"
-                    blurDataURL="/path/to/placeholder-image.jpg"
-                /> */}
+                <Topic title={newsData?.data.title || ''} date={date} commentCount={commentCount} detail={detail} />
 
                 <div>
-                    {/* {paragraphs.map((paragraph, index) => (
-                        <div key={index} className="mt-[45px]" dir="rtl">
-                            <span className="font-bold text-base/[30px] text-right" dir="rtl">
-                                {paragraph.topic}
-                            </span>
-                            <p className="font-normal text-base/[30px] text-justify" dir="rtl">
-                                {paragraph.content}
-                            </p>
-                        </div>
-                    ))} */}
 
                     <div
                         dir="rtl"
                         className="text-base/[30px]  text-justify mt-[40px]"
-                        dangerouslySetInnerHTML={{ __html: data.data?.data.htmlCode || "" }}
+                        dangerouslySetInnerHTML={{ __html: newsData?.data?.htmlCode || "" }}
                     />
                 </div>
 
-                <CommentSection />
+                <CommentSection commentData={commentData} />
             </div>
             <Footer />
         </>

@@ -1,26 +1,16 @@
-"use client";
-import { useRef, useEffect } from 'react';
 import FestivalInfoCard from "@/components/festivalInfoCard/festivalInfoCard";
 import { Props } from './types';
 
 
-export default function FestivalHighlights({values} : Props) {
-    const containerRef = useRef<HTMLDivElement>(null);
+export default function FestivalHighlights({ values }: Props) {
 
     const festivalTitle = values?.data.keyValues.find(item => item.key === 'festival-highlights-title');
 
 
     return (
-        <div ref={containerRef} className="container w-full pr-[60px] overflow-scroll scrollbar-hide scroll-smooth min-w-full mt-[246px] b-purple-800 flex items-center justify-start gap-11" dir="rtl">
-
-            {/* <p className="font-extrabold text-4xl/[63px] min-w-[429px]">
-                آنچه در هشتمین
-                <span className="text-customGreen"> جشنواره </span>
-                در انتظار شماست
-            </p> */}
+        <div className="container w-full pr-[60px] overflow-scroll scrollbar-hide scroll-smooth min-w-full mt-[246px] b-purple-800 flex items-center justify-start gap-11" dir="rtl">
 
             <div className=" text-4xl/[63px] min-w-[429px]" dangerouslySetInnerHTML={{ __html: festivalTitle?.value || "" }} />
-
 
             <div className="w-fit flex flex-row gap-7 pl-[60px]">
                 <FestivalInfoCard />

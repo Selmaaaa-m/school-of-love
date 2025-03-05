@@ -30,10 +30,6 @@ const Topic: React.FC<TopicProps> = ({ title, date, commentCount }) => {
                     </span>
                 </div>
             </div>
-
-            {/* <p className="font-normal text-base/[30px] text-center mt-5" dir="rtl">
-                {detail}
-            </p> */}
         </div>
     );
 };

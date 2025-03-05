@@ -7,12 +7,8 @@ export default async function Home() {
     const type = "PAGE"
     let data = undefined
 
-    // let page: GetPage | undefined = undefined;
-
-
 
     try {
-        console.log(process.env.NEXT_PUBLIC_BASE_URL + `/api/v1/client/web/getPage/${type}/${url}`)
         const response = await fetch(
             process.env.NEXT_PUBLIC_BASE_URL + `/api/v1/client/web/getPage/${type}/${url}`,
             {
@@ -26,12 +22,10 @@ export default async function Home() {
 
 
         if (!response.ok) {
-            // page = undefined
             throw new Error("Network response was not ok");
         }
         data = await response.json() as GetPage;
 
-        // page = data
     } catch (err) {
         console.error(err)
     }

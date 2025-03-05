@@ -3,12 +3,12 @@ import Link from "next/link";
 import arrow from './icons/arrow.svg';
 import { NewsItemProps } from "./types";
 
-const NewsItem: React.FC<NewsItemProps> = ({ id, imageSrc, text }) => {
+const NewsItem: React.FC<NewsItemProps> = ({ imageSrc, text, url }) => {
     return (
-        <Link href={`/news/${id}`} passHref>
+        <Link href={`/news/${url}`}>
             <div className="w-[385px] mt-[83px] transform hover:translate-y-[-5px] transition-transform duration-300">
                 <Image src={imageSrc} alt={text} width={385} height={216} />
-                <p className="font-medium text-2xl text-right mt-5" dir="rtl">
+                <p className="text-2xl text-right mt-5" dir="rtl">
                     {text}
                 </p>
                 <div className="flex gap-[10px] mt-3 cursor-pointer" dir="rtl">

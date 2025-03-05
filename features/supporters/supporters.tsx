@@ -1,5 +1,3 @@
-"use client"
-
 import { Props } from "./types";
 
 export default function Supporters({ values }: Props) {
@@ -9,8 +7,6 @@ export default function Supporters({ values }: Props) {
     return (
         <div className="w-full mt-[267px] text-center" dir="rtl">
             <div className="text-4xl/[63px]  " dangerouslySetInnerHTML={{ __html: supportersTitle?.value || "" }} />
-                {/* حامیان
-                <span className="text-customGreen"> جشنواره </span> */}
             
             <div className="h-[336px]">
             </div>

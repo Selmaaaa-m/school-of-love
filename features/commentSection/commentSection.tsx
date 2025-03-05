@@ -2,14 +2,16 @@
 import { useState, useRef, useEffect } from "react";
 import Comment from "@/components/comment/comment";
 import Alert from "@/components/alert/alert";
+import { Props } from "./types";
+import { convertToJalali } from "@/utils/dateUtils";
 
-export default function CommentSection() {
+export default function CommentSection({ commentData }: Props) {
     const [comment, setComment] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
-    const [postId, setPostId] = useState(0);  // Set the postId accordingly
-    const [parentId, setParentId] = useState(0);  // Set the parentId accordingly
+    const [postId, setPostId] = useState(0);
+    const [parentId, setParentId] = useState(0);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,15 +49,12 @@ export default function CommentSection() {
             });
 
             if (response.ok) {
-                // Handle successful form submission
                 console.log("Comment submitted:", { comment, name, email });
-                // Clear the form
                 setComment("");
                 setName("");
                 setEmail("");
                 setAlertMessage(""); // Clear any previous alert message
             } else {
-                // Handle error response
                 setAlertMessage("مشکلی در ارسال دیدگاه به وجود آمده است.");
             }
         } catch (error) {
@@ -103,7 +102,7 @@ export default function CommentSection() {
                         placeholder="ایمیل"
                         dir="ltr"
                         value={email}
-                        onInput={handleEmailInput} // Use onInput to filter invalid characters
+                        onInput={handleEmailInput}
                         maxLength={100}
                     />
                     <button
@@ -117,16 +116,22 @@ export default function CommentSection() {
 
             {/* comments */}
             <div className="w-full mt-[140px] flex flex-col gap-10">
-                <Comment
+                {
+                    commentData && commentData.data.comment.map(item => (
+                        <Comment
+                            name={item.name || item.firstname + ' ' + item.lastname}
+                            date={convertToJalali(item.createdAt)}
+                            content={item.body} />
+
+                    ))
+                }
+
+                {/* comment example to be deleted */}
+                {/* <Comment
                     name="امین آزاد"
                     date="۱۴۰۳/۱۱/۳۰"
                     content="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
-                />
-                <Comment
-                    name="امین آزاد"
-                    date="۱۴۰۳/۱۱/۳۰"
-                    content="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
-                />
+                /> */}
             </div>
 
             {alertMessage && <Alert message={alertMessage} onClose={() => setAlertMessage("")} />}

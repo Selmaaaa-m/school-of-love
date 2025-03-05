@@ -35,7 +35,6 @@ export default async function HomePage({ data }: Props) {
             throw new Error("Network response was not ok");
         }
         postListData = await response.json() as GetPostList;
-        console.log(postListData);
         
 
     } catch (err) {
@@ -52,7 +51,7 @@ export default async function HomePage({ data }: Props) {
             <FestivalHighlights values={pageData || undefined} />
             <MainEvents values={pageData || undefined} />
             <Supporters values={pageData || undefined} />
-            <News values={pageData || undefined} />
+            <News values={pageData || undefined} newsList={postListData || undefined} />
             <Footer />
         </>
     );

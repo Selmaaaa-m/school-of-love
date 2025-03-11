@@ -35,13 +35,14 @@ export default async function HomePage({ data }: Props) {
             throw new Error("Network response was not ok");
         }
         postListData = await response.json() as GetPostList;
-        
+
 
     } catch (err) {
         console.error(err)
     }
 
     const pageData = data;
+
 
     return (
         <>

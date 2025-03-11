@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useLayoutEffect } from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
 import LogoDetails from "./logoDetails/logoDetails";
@@ -24,65 +24,134 @@ export default function Logo() {
         "۱۵ تا ۲۵ فروردین"
     ];
 
+    useLayoutEffect(() => {
+        const canvas = document.getElementById("miCanvas") as HTMLCanvasElement;
+        const context = canvas.getContext("2d");
+        const container = canvas.parentElement;
+        if (!context || !container) return;
+
+        canvas.width = container.clientWidth;
+        canvas.height = window.innerHeight;
+
+        const mouseCoords = {
+            x: 0,
+            y: 0,
+        };
+
+        window.addEventListener("mousemove", (e) => {
+            if (mouseCoords.x !== undefined && mouseCoords.y !== undefined) {
+                if (mouseCoords.x < e.x) {
+                    puntos.forEach(punto => {
+                        punto.x -= -0.6;
+                    });
+                }
+
+                if (mouseCoords.x > e.x) {
+                    puntos.forEach(punto => {
+                        punto.x += -0.6;
+                    });
+                }
+
+                if (mouseCoords.y < e.y) {
+                    puntos.forEach(punto => {
+                        punto.y -= -0.6;
+                    });
+                }
+
+                if (mouseCoords.y > e.y) {
+                    puntos.forEach(punto => {
+                        punto.y += -0.6;
+                    });
+                }
+            }
+
+            mouseCoords.x = e.x;
+            mouseCoords.y = e.y;
+        });
+
+        class Punto {
+            x: number;
+            y: number;
+            size: number;
+            floatX: number;
+            floatY: number;
+            color: string | undefined;
+
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3;
+                this.floatX = Math.random() * 0.3 - 0.1;
+                this.floatY = Math.random() * 0.3 - 0.1;
+                this.color = randomColor();
+            }
+
+            draw() {
+                if (!context) return;
+                context.beginPath();
+                context.fillStyle = this.color || "black";
+                context.arc(this.x, this.y, this.size, 0, 360);
+                context.fill();
+            }
+
+            update() {
+                if (this.x > canvas.width) this.x = -10;
+                if (this.x < -20) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = -10;
+                if (this.y < -20) this.y = canvas.height;
+
+                this.x += this.floatX;
+                this.y += this.floatY;
+                this.draw();
+            }
+        }
+
+        const puntos: Punto[] = [];
+        for (let i = 0; i < 150; i++) puntos[i] = new Punto();
+
+        function move() {
+            if (context) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            puntos.forEach((punto) => {
+                punto.update();
+            });
+
+            requestAnimationFrame(move);
+        }
+
+        move();
+
+        function randomColor() {
+            const random = Math.random() * 3;
+            if (random > 2) return "rgb(206, 206, 206)";
+            if (random < 2 && random > 1) return "gray";
+            if (random < 1) return "#7db424";
+        }
+    }, []);
+
     return (
-        <div className="relative w-full flex items-center justify-center px-6 lg:px-[70px]" onMouseMove={handleMouseMove}>
-            <div className="absolute top-[20%] sm:top-[20%] left-20 sm:left-[20%]" style={getTransformStyle(-0.05, -0.05)}>
+        <div className="relative w-full flex items-center justify-center px-6 lg:px-[70px] z-30" onMouseMove={handleMouseMove}>
+            <canvas id="miCanvas" className="absolute w-full bg-transparent top-0 left-0 overflow-x-hidden z-10"></canvas>
+            <div className="absolute top-[20%] sm:top-[20%] left-20 sm:left-[20%] z-30" style={getTransformStyle(-0.05, -0.05)}>
                 <LogoDetails text={textOptions[0]} backgroundColor="gold" />
             </div>
-            <div className="absolute top-28 sm:top-[40%] right-20 sm:right-[27%]" style={getTransformStyle(0.05, -0.05)}>
+            <div className="absolute top-28 sm:top-[40%] right-20 sm:right-[27%] z-30" style={getTransformStyle(0.05, -0.05)}>
                 <LogoDetails text={textOptions[1]} backgroundColor="yellow" />
             </div>
             <Image
-                className="h-full object-contain"
+                className="h-full object-contain z-20"
                 src={logo}
                 alt="مدرسه عشق"
                 width={500}
                 height={425}
             />
-            <div className="absolute bottom-24 sm:bottom-[30%] left-24 sm:left-[30%]" style={getTransformStyle(-0.05, 0.05)}>
+            <div className="absolute bottom-24 sm:bottom-[30%] left-24 sm:left-[30%] z-30" style={getTransformStyle(-0.05, 0.05)}>
                 <LogoDetails text={textOptions[2]} backgroundColor="yellow" />
             </div>
-            <div className="absolute bottom-8 sm:bottom-[10%] right-16 sm:right-[23%]" style={getTransformStyle(0.05, 0.05)}>
+            <div className="absolute bottom-8 sm:bottom-[10%] right-16 sm:right-[23%] z-30" style={getTransformStyle(0.05, 0.05)}>
                 <LogoDetails text={textOptions[3]} backgroundColor="gold" />
-            </div>
-
-            {/* Dots container using Tailwind CSS */}
-            <div
-                className="absolute top-1/2 left-1/2 w-full h-full transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-                style={{
-                    pointerEvents: "none",
-                    transform: `translate(-50%, -50%)`,
-                }}
-            >
-                {/* Dot 1 */}
-                <div
-                    className="absolute w-[10px] h-[10px] top-[10%] left-[10%] bg-yellow-400 rounded-full shadow-[0_0_10px_yellow,0_0_20px_yellow,0_0_30px_yellow] animate-pulse"
-                    style={getTransformStyle(-0.05, -0.05)}
-                ></div>
-
-                {/* Dot 2 */}
-                <div
-                    className="absolute w-[10px] h-[10px] top-[50%] left-[50%] bg-yellow-400 rounded-full shadow-[0_0_10px_yellow,0_0_20px_yellow,0_0_30px_yellow] animate-pulse"
-                    style={getTransformStyle(0.05, 0.05)}
-                ></div>
-
-                {/* Dot 2.5 */}
-                <div
-                    className="absolute w-[10px] h-[10px] top-[80%] left-[20%] bg-yellow-400 rounded-full shadow-[0_0_10px_yellow,0_0_20px_yellow,0_0_30px_yellow] animate-pulse"
-                    style={getTransformStyle(0.05, -0.05)}
-                ></div>
-
-                {/* Dot 3 */}
-                <div
-                    className="absolute w-[10px] h-[10px] top-[20%] right-[20%] bg-yellow-400 rounded-full shadow-[0_0_10px_yellow,0_0_20px_yellow,0_0_30px_yellow] animate-pulse"
-                    style={getTransformStyle(-0.05, 0.05)}
-                ></div>
-
-                {/* Dot 4 */}
-                <div
-                    className="absolute w-[10px] h-[10px] top-[80%] right-[10%] bg-yellow-400 rounded-full shadow-[0_0_10px_yellow,0_0_20px_yellow,0_0_30px_yellow] animate-pulse"
-                    style={getTransformStyle(0.05, 0.05)}
-                ></div>
             </div>
         </div>
     );

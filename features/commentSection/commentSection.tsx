@@ -5,12 +5,12 @@ import Alert from "@/components/alert/alert";
 import { Props } from "./types";
 import { convertToJalali } from "@/utils/dateUtils";
 
-export default function CommentSection({ commentData }: Props) {
+export default function CommentSection({ commentData, postId }: Props) {
     const [comment, setComment] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
-    const [postId, setPostId] = useState(0);
+    const [alertType, setAlertType] = useState<"success" | "error">("error");
     const [parentId, setParentId] = useState(0);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -18,23 +18,25 @@ export default function CommentSection({ commentData }: Props) {
         const value = e.target.value;
         const filteredValue = value.replace(/[^a-zA-Z0-9._%+-@]/g, ''); // Only allow valid characters
         setEmail(filteredValue);
-    };
+    };    
 
     const handleSubmit = async () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!comment || !name || !email) {
             setAlertMessage("لطفا همه فیلد ها را پر کنید.");
+            setAlertType("error");
             return;
         }
 
         if (!emailRegex.test(email)) {
             setAlertMessage("لطفا ایمیل معتبر وارد کنید.");
+            setAlertType("error");
             return;
         }
 
         try {
-            const response = await fetch('/api/v1/client/web/createComment', {
+            const response = await fetch( process.env.NEXT_PUBLIC_BASE_URL + '/api/v1/client/web/createComment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,24 +44,30 @@ export default function CommentSection({ commentData }: Props) {
                 body: JSON.stringify({
                     body: comment,
                     postId: postId,
-                    parentId: parentId,
+                    parentId: 0,
                     name: name,
                     email: email,
+                    type: 'POST'
                 }),
             });
 
+            console.log("response: ", response);
+            
             if (response.ok) {
                 console.log("Comment submitted:", { comment, name, email });
+                setAlertMessage('دیدگاه شما با موفقیت ثبت شد');
+                setAlertType("success");
                 setComment("");
                 setName("");
                 setEmail("");
-                setAlertMessage(""); // Clear any previous alert message
             } else {
                 setAlertMessage("مشکلی در ارسال دیدگاه به وجود آمده است.");
+                setAlertType("error");
             }
         } catch (error) {
             console.error("Error submitting comment:", error);
             setAlertMessage("مشکلی در ارسال دیدگاه به وجود آمده است.");
+            setAlertType("error");
         }
     };
 
@@ -89,8 +97,10 @@ export default function CommentSection({ commentData }: Props) {
                 <div className="w-full mt-[30px] flex flex-row gap-10">
                     <input
                         type="text"
-                        className="bg-transparent text-right flex-grow pb-[14px] caret-customGreen outline-none border-b border-[#797979] focus:border-customGreen"
+                        className="bg-transparent text-right f
+                        flex-grow pb-[14px] caret-customGreen outline-none border-b border-[#797979] focus:border-customGreen"
                         placeholder="نام و نام خانوادگی..."
+                        alt="name"
                         dir="rtl"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -100,6 +110,7 @@ export default function CommentSection({ commentData }: Props) {
                         type="email"
                         className="bg-transparent text-right flex-grow pb-[14px] caret-customGreen outline-none border-b border-[#797979] focus:border-customGreen"
                         placeholder="ایمیل"
+                        alt="email"
                         dir="ltr"
                         value={email}
                         onInput={handleEmailInput}
@@ -134,7 +145,7 @@ export default function CommentSection({ commentData }: Props) {
                 /> */}
             </div>
 
-            {alertMessage && <Alert message={alertMessage} onClose={() => setAlertMessage("")} />}
+            {alertMessage && <Alert message={alertMessage} onClose={() => setAlertMessage("")} type={alertType} />}
         </div>
     );
 }

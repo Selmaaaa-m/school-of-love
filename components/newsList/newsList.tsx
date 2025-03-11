@@ -4,10 +4,6 @@ import { useState } from "react";
 import NewsItem from "../newsItem/newsItem";
 import { NewsListProps } from "./types";
 
-// test
-import pic3 from "@/public/images/news/pic3.png";
-
-
 const NewsList: React.FC<NewsListProps> = ({ allNewsItems }) => {
     const [visibleNewsCount, setVisibleNewsCount] = useState(3);
 
@@ -16,10 +12,15 @@ const NewsList: React.FC<NewsListProps> = ({ allNewsItems }) => {
     };
 
     return (
-        <div className="w-full flex flex-col items-center">
-            <div className=" w-full flex flex-row flex-wrap gap-5 justify-center items-start" dir="rtl">
+        <div className="w-fit flex flex-col items-center justify-center">
+            <div className="w-fit inline-flex flex-row flex-wrap gap-[20px] justify-center items-start" dir="rtl">
                 {allNewsItems?.data.slice(0, visibleNewsCount).map((item) => (
-                    <NewsItem key={item.id} imageSrc={pic3} text={item.title} url={item.url} />
+                    <NewsItem 
+                        key={item.id} 
+                        imageSrc={item.files && item.files.length > 0 ? item.files[0].url : ''} 
+                        text={item.title} 
+                        url={item.url} 
+                    />
                 ))}
             </div>
 

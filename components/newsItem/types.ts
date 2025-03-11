@@ -1,7 +1,5 @@
-import { StaticImageData } from "next/image";
-
 export interface NewsItemProps {
-    imageSrc: StaticImageData;
+    imageSrc: string;
     text: string;
     url: string;
 }

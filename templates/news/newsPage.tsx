@@ -13,15 +13,14 @@ export interface Data {
 
 export default function NewsPage({ newsData, commentData }: Data) {
 
-    const date = newsData?.data.createdAt ? convertToJalali(newsData.data.createdAt) : '';
+    const date = newsData?.data.createdAt ? convertToJalali(newsData.data.createdAt) : '';    
     const commentCount = commentData?.data.comment.length || 0;
     const detail = "معاون فرهنگی هنری سازمان بسیج مستضعفین گفت: امروز دشمن در حال جنگیدن با ما از طریق رسانه‌ها و فضای مجازی است؛ جنگی که به‌طور مستقیم بر افکار و اندیشه‌های مردم تأثیر می‌گذارد و روایتگری ابزاری قدرتمند برای مقابله با این جنگ نرم است.";
 
     return (
         <>
-            <div className="px-[142px] flex flex-col items-center justify-start">
+            <div className=" w-full px-[142px] flex flex-col items-center justify-start">
                 <Topic title={newsData?.data.title || ''} date={date} commentCount={commentCount} detail={detail} />
-
                 <div>
 
                     <div
@@ -31,7 +30,7 @@ export default function NewsPage({ newsData, commentData }: Data) {
                     />
                 </div>
 
-                <CommentSection commentData={commentData} />
+                <CommentSection commentData={commentData} postId={newsData?.data.id} />
             </div>
             <Footer />
         </>

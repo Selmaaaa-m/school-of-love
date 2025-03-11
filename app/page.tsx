@@ -1,4 +1,4 @@
-import HomePage from "@/pages/home/homePage";
+import HomePage from "@/templates/home/homePage";
 import { GetPage } from "@/api/getPage"
 
 export default async function Home() {
@@ -31,7 +31,7 @@ export default async function Home() {
     }
 
     return (
-        <div className="w-full pt-[92px] pb-[85px] bg-gradient-to-b h-fit from-[#063532] to-black items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)]">
+        <div className="homePage w-full pt-[92px] pb-[85px] bg-gradient-to-b h-fit from-[#063532] to-black items-center justify-items-center min-h-screen font-[family-name:var(--font-geist-sans)]">
             <HomePage data={data} />
         </div>
     );

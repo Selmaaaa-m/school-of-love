@@ -5,6 +5,7 @@ import { convertToJalali } from "@/utils/dateUtils";
 
 import { GetPost } from "@/api/getPost";
 import { GetComments } from "@/api/getCommentList";
+import InnerHTML from "@/components/innerHTML/innerHTML";
 
 export interface Data {
     newsData: GetPost | undefined
@@ -13,7 +14,7 @@ export interface Data {
 
 export default function NewsPage({ newsData, commentData }: Data) {
 
-    const date = newsData?.data.createdAt ? convertToJalali(newsData.data.createdAt) : '';    
+    const date = newsData?.data.createdAt ? convertToJalali(newsData.data.createdAt) : '';
     const commentCount = commentData?.data.comment.length || 0;
     const detail = "معاون فرهنگی هنری سازمان بسیج مستضعفین گفت: امروز دشمن در حال جنگیدن با ما از طریق رسانه‌ها و فضای مجازی است؛ جنگی که به‌طور مستقیم بر افکار و اندیشه‌های مردم تأثیر می‌گذارد و روایتگری ابزاری قدرتمند برای مقابله با این جنگ نرم است.";
 
@@ -22,12 +23,7 @@ export default function NewsPage({ newsData, commentData }: Data) {
             <div className=" w-full px-[142px] flex flex-col items-center justify-start">
                 <Topic title={newsData?.data.title || ''} date={date} commentCount={commentCount} detail={detail} />
                 <div>
-
-                    <div
-                        dir="rtl"
-                        className="text-base/[30px]  text-justify mt-[40px]"
-                        dangerouslySetInnerHTML={{ __html: newsData?.data?.htmlCode || "" }}
-                    />
+                    <InnerHTML style="text-base/[30px]  !text-justify mt-[40px]" details={newsData?.data?.htmlCode || ""} />
                 </div>
 
                 <CommentSection commentData={commentData} postId={newsData?.data.id} />

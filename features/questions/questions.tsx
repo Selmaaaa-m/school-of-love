@@ -1,8 +1,9 @@
-'use client' 
+'use client'
 import { GetPage } from "@/api/getPage";
 import { useEffect, useRef } from "react";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import InnerHTML from "@/components/innerHTML/innerHTML";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,44 +23,15 @@ export default function Questions({ values }: Props) {
         questionsTwo?.value || "",
     ];
 
-    // useEffect(() => {
-    //     const elements = ref.current?.querySelectorAll(".line p");
-
-    //     if (elements) {
-    //         const tl = gsap.timeline();
-
-    //         tl.from(elements, {
-    //             scrollTrigger: {
-    //                 trigger: '.line',
-    //                 start: 'top center',
-    //                 end: 'bottom center',
-    //                 markers: true,
-    //             },
-    //             y: 100,
-    //             ease: "power4.out",
-    //             // delay: 1,
-    //             skewY: 7,
-    //             duration: 1,
-    //             stagger: {
-    //                 amount: 0.3
-    //             }
-    //         });
-
-    //         tl.addLabel('start')
-    //         .to('.line p', {ease: "power4.out"} ,'start')
-    //     }
-    // }, [values]);
 
     return (
-        <div ref={ref} className="w-full h-fit flex flex-col items-center gap-14 mt-40 px-[70px]" dir="rtl">
-            <div className="text-[32px]/[56px]" dangerouslySetInnerHTML={{ __html: questionsTitle?.value || "" }} />
+        <div ref={ref} className="w-full h-fit flex flex-col items-center gap-14 mt-40 px-[50px] md:px-[70px]" dir="rtl">
+            <InnerHTML style="text-[32px]/[56px]" details={questionsTitle?.value || ""} />
             <div className="flex flex-col md:flex-row h-fit w-full gap-20">
                 {values ? text.map((value, index) => (
-                    <div
-                        key={index}
-                        className="line font-normal text-lg text-justify"
-                        dangerouslySetInnerHTML={{ __html: value || "" }}
-                    />
+                    <>
+                        <InnerHTML style="line font-normal !text-lg !text-justify" key={index} details={value || ""} />
+                    </>
                 )) :
                     <div className='w-full flex justify-center animate-pulse g-red-100' dir="ltr">
                         loading ...

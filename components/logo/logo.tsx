@@ -4,6 +4,7 @@ import { useState, MouseEvent, useLayoutEffect } from "react";
 import Image from "next/image";
 import logo from "@/public/images/logo.png";
 import LogoDetails from "./logoDetails/logoDetails";
+// import pattern from '@/public/images/logoPattern.png'
 
 export default function Logo() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -132,12 +133,13 @@ export default function Logo() {
     }, []);
 
     return (
-        <div className="relative w-full flex items-center justify-center px-6 lg:px-[70px] z-30" onMouseMove={handleMouseMove}>
-            <canvas id="miCanvas" className="absolute w-full bg-transparent top-0 left-0 overflow-x-hidden z-10"></canvas>
-            <div className="absolute top-[20%] sm:top-[20%] left-20 sm:left-[20%] z-30" style={getTransformStyle(-0.05, -0.05)}>
+        <div className="relative w-full flex items-center justify-center px-6 pt-[92px] lg:px-[70px] z-30" onMouseMove={handleMouseMove}>
+            {/* <Image className="absolute w-full h-full object-fill " height={603} src={pattern} alt={""}></Image> */}
+            <canvas id="miCanvas" className="absolute w-full h-fit bg-transparent top-0 left-0 overflow-x-hidden z-10"></canvas>
+            <div className=" hidden md:block absolute md:top-[20%] md:left-[5%] lg:left-[20%] z-30" style={getTransformStyle(-0.05, -0.05)}>
                 <LogoDetails text={textOptions[0]} backgroundColor="gold" />
             </div>
-            <div className="absolute top-28 sm:top-[40%] right-20 sm:right-[27%] z-30" style={getTransformStyle(0.05, -0.05)}>
+            <div className=" hidden md:block absolute md:top-[40%] md:right-[10%] lg:right-[27%] z-30" style={getTransformStyle(0.05, -0.05)}>
                 <LogoDetails text={textOptions[1]} backgroundColor="yellow" />
             </div>
             <Image
@@ -147,10 +149,10 @@ export default function Logo() {
                 width={500}
                 height={425}
             />
-            <div className="absolute bottom-24 sm:bottom-[30%] left-24 sm:left-[30%] z-30" style={getTransformStyle(-0.05, 0.05)}>
+            <div className=" hidden md:block absolute md:bottom-[30%] md:left-[15%] lg:left-[30%] z-30" style={getTransformStyle(-0.05, 0.05)}>
                 <LogoDetails text={textOptions[2]} backgroundColor="yellow" />
             </div>
-            <div className="absolute bottom-8 sm:bottom-[10%] right-16 sm:right-[23%] z-30" style={getTransformStyle(0.05, 0.05)}>
+            <div className=" hidden md:block absolute md:bottom-[10%] md:right-[5%] lg:right-[23%] z-30" style={getTransformStyle(0.05, 0.05)}>
                 <LogoDetails text={textOptions[3]} backgroundColor="gold" />
             </div>
         </div>

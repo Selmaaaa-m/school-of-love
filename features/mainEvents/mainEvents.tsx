@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Tabs from "@/components/tabs/tabs";
 import { Props, Tab } from './types';
+import InnerHTML from '@/components/innerHTML/innerHTML';
 
 export default function MainEvents({ values }: Props) {
     const [activeTab, setActiveTab] = useState(0);
@@ -34,12 +35,13 @@ export default function MainEvents({ values }: Props) {
 
 
     return (
-        <div className="w-full mt-[253px] flex flex-col items-center px-[88px]" dir="rtl">
-            <div className="text-[32px]/[56px]" dangerouslySetInnerHTML={{ __html: eventsTitle?.value || "" }} />
+        <div className="w-full mt-[253px] flex flex-col justify-center items-center md:px-[88px] " dir="rtl">
+            <InnerHTML style='text-[32px]/[56px] w-fit !text-center md:px-[88px] px-[50px]' details={eventsTitle?.value || ""} />
             <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} fade={fade} setFade={setFade} />
 
-            <div className={`w-full mt-[127px] p-4 transition-opacity duration-300 flex flex-col justify-start ${fade ? 'opacity-0' : 'opacity-100'}`}>
-                <div className="" dangerouslySetInnerHTML={{ __html: tabs[activeTab].content || "" }} />
+            <div className={`w-full mt-[127px] p-4 transition-opacity duration-300 flex flex-col justify-start md:px-[88px] px-[50px]
+                 ${fade ? 'opacity-0' : 'opacity-100'}`}>
+                <InnerHTML style='text-right' details={tabs[activeTab].content || ""} />
             </div>
         </div>
     );

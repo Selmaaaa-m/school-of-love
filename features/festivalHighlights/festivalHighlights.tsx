@@ -4,6 +4,7 @@ import { Props } from './types';
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import InnerHTML from '@/components/innerHTML/innerHTML';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,16 +24,16 @@ export default function FestivalHighlights({ values }: Props) {
                     const amountToScroll = racesWidth - window.innerWidth + 100;
 
                     gsap.to(races, {
-                        x: amountToScroll, // Changed to negative for leftward scroll
+                        x: amountToScroll,
                         ease: 'none',
                     });
 
                     ScrollTrigger.create({
                         trigger: '.racesContainer',
                         start: 'top 20%',
-                        end: `+=${amountToScroll}`, // Using calculated value
+                        end: `+=${amountToScroll}`,
                         pin: '.racesContainer',
-                        animation: gsap.getTweensOf(races)[0], // Get the existing tween
+                        animation: gsap.getTweensOf(races)[0],
                         scrub: 1,
                         anticipatePin: 1,
                         invalidateOnRefresh: true,
@@ -45,7 +46,7 @@ export default function FestivalHighlights({ values }: Props) {
                 });
             }
         }
-        return ()=>{
+        return () => {
             ScrollTrigger.killAll();
         }
     }, []);
@@ -57,10 +58,7 @@ export default function FestivalHighlights({ values }: Props) {
             dir="rtl"
         >
             <div className="races w-fit flex flex-row justify-center items-center pr-14">
-                <div
-                    className="text-4xl leading-[63px] min-w-[429px]"
-                    dangerouslySetInnerHTML={{ __html: festivalTitle?.value || '' }}
-                />
+                <InnerHTML style='text-4xl text-right leading-[63px] min-w-[429px]' details={festivalTitle?.value || ''} />
                 <div className="w-fit flex flex-row gap-7 pl-15">
                     <FestivalInfoCard />
                     <FestivalInfoCard />

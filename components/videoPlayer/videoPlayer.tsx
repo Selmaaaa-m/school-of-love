@@ -26,7 +26,7 @@ export default function VideoPlayer({ video }: Props) {
                 .to(videoRef.current, { y: 150, translateX: '-50%', left: '50%' })
                 .to('.festival-details', { opacity: 0 }, 'translate')
                 .addLabel('start')
-                .to(videoRef.current, { scale: 1.1, zIndex: 10 })
+                .to(videoRef.current, { scale: 1.2, zIndex: 10 })
                 .to(videoRef.current, { translateY: '50%', top: '50%' })
                 .addLabel('end')
         }
@@ -35,13 +35,12 @@ export default function VideoPlayer({ video }: Props) {
     return (
         <div
             ref={videoRef}
-            className={`video-container l-20 g-purple-300 flex justify-center items-center relative w-full h-full z-10 mb-[150px] h-[56.25% `}
+            className={`video-container l-20 g-purple-300 flex justify-center items-center relative w-full h-full mb-[150px] z-30 `}
         >
             <video
                 controls
-                width="100%"
                 height="100%"
-                className="video rounded-xl bg-transparent"
+                className="video rounded-xl bg-transparent z-30 md:w-full w-[90%]"
             >
                 <source src={fileUrl} type="video/mp4" />
                 Your browser does not support the video tag.

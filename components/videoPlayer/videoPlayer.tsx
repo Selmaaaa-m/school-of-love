@@ -13,22 +13,26 @@ export default function VideoPlayer({ video }: Props) {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: videoRef.current,
-                    start: 'top 20%',
-                    end: 'bottom 20%',
-                    scrub: 1,
-                }
-            });
+            const mediaQuery = window.matchMedia("(min-width: 768px)");
 
-            tl.addLabel('translate')
-                .to(videoRef.current, { y: 160, translateX: '-50%', left: '50%' })
-                .to('.festival-details', { opacity: 0 }, 'translate')
-                .addLabel('start')
-                .to(videoRef.current, { scale: 1.2, zIndex: 10 })
-                .to(videoRef.current, { display: 'flex' , alignItems: 'center', justifyContent: 'center' })
-                .addLabel('end')
+            if (mediaQuery.matches) {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: videoRef.current,
+                        start: 'top 20%',
+                        end: 'bottom 20%',
+                        scrub: 1,
+                    }
+                });
+
+                tl.addLabel('translate')
+                    .to(videoRef.current, { y: 160, translateX: '-50%', left: '50%' })
+                    .to('.festival-details', { opacity: 0 }, 'translate')
+                    .addLabel('start')
+                    .to(videoRef.current, { scale: 1.2, zIndex: 10 })
+                    .to(videoRef.current, { display: 'flex', alignItems: 'center', justifyContent: 'center' })
+                    .addLabel('end')
+            }
         }
     }, []);
 
@@ -39,8 +43,9 @@ export default function VideoPlayer({ video }: Props) {
         >
             <video
                 controls
+                width={"100%"}
                 height="100%"
-                className="video rounded-xl bg-black z-30 md:w-full w-[90%]"
+                className="video rounded-xl bg-black z-30"
             >
                 <source src={fileUrl} type="video/mp4" />
                 Your browser does not support the video tag.

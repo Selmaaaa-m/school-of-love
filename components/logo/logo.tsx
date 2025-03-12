@@ -135,7 +135,7 @@ export default function Logo() {
     return (
         <div className="relative w-full flex items-center justify-center px-6 pt-[92px] lg:px-[70px] z-30" onMouseMove={handleMouseMove}>
             <Image
-                className=" opacity-80 absolute w-full object-cover gradient-mask-b-70"
+                className=" opacity-80 absolute w-full top-0 h-[120%] object-cover gradient-mask-b-70"
                 height={603}
                 src={pattern}
                 alt={""}

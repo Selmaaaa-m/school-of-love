@@ -54,7 +54,7 @@ export default function FestivalHighlights({ values }: Props) {
     return (
         <div
             ref={containerRef}
-            className="racesContainer relative w-full h-fit overflow-hidden mt-[140px] sm:mt-[280px]"
+            className="racesContainer relative w-full h-fit overflow-hidden mt-[50px] md:mt-[280px]"
             dir="rtl"
         >
             <div className="races w-fit flex flex-row justify-center items-center pr-14">

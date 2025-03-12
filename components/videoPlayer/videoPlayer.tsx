@@ -27,7 +27,7 @@ export default function VideoPlayer({ video }: Props) {
                 .to('.festival-details', { opacity: 0 }, 'translate')
                 .addLabel('start')
                 .to(videoRef.current, { scale: 1.2, zIndex: 10 })
-                // .to(videoRef.current, { translateY: '50%', top: '50%' })
+                .to(videoRef.current, { display: 'flex' , alignItems: 'center', justifyContent: 'center' })
                 .addLabel('end')
         }
     }, []);

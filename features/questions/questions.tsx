@@ -25,7 +25,7 @@ export default function Questions({ values }: Props) {
 
 
     return (
-        <div ref={ref} className="w-full h-fit flex flex-col items-center gap-14 mt-40 px-[50px] md:px-[70px]" dir="rtl">
+        <div ref={ref} className="w-full h-fit flex flex-col items-center gap-14 mt-40 px-[30px] md:px-[70px]" dir="rtl">
             <InnerHTML style="text-[32px]/[56px]" details={questionsTitle?.value || ""} />
             <div className="flex flex-col md:flex-row h-fit w-full gap-20">
                 {values ? text.map((value, index) => (

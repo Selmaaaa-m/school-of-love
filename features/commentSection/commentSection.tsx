@@ -11,7 +11,6 @@ export default function CommentSection({ commentData, postId }: Props) {
     const [email, setEmail] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState<"success" | "error">("error");
-    const [parentId, setParentId] = useState(0);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,8 +49,6 @@ export default function CommentSection({ commentData, postId }: Props) {
                     type: 'POST'
                 }),
             });
-
-            console.log("response: ", response);
             
             if (response.ok) {
                 console.log("Comment submitted:", { comment, name, email });

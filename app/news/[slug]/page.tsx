@@ -20,6 +20,10 @@ export default async function News({
             process.env.NEXT_PUBLIC_BASE_URL + `/api/v1/client/web/getPost/${type}/${params.slug}`,
             {
                 method: "GET",
+                cache: "no-cache",
+                next: {
+                    revalidate: 0
+                }
             }
         );
 
@@ -37,9 +41,13 @@ export default async function News({
             process.env.NEXT_PUBLIC_BASE_URL + `/api/v1/client/web/getCommentList/${type}/${params.slug}`,
             {
                 method: "GET",
-            }
+                cache: "no-cache",
+                next: {
+                    revalidate: 0
+                }
+            },
         );
-        
+
 
         if (!response.ok) {
             throw new Error("Network response was not ok");

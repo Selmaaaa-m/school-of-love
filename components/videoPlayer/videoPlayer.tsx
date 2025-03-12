@@ -17,13 +17,13 @@ export default function VideoPlayer({ video }: Props) {
                 scrollTrigger: {
                     trigger: videoRef.current,
                     start: 'top 20%',
-                    end: 'bottom center',
+                    end: 'bottom 20%',
                     scrub: 1,
                 }
             });
 
             tl.addLabel('translate')
-                .to(videoRef.current, { y: 150, translateX: '-50%', left: '50%' })
+                .to(videoRef.current, { y: 160, translateX: '-50%', left: '50%' })
                 .to('.festival-details', { opacity: 0 }, 'translate')
                 .addLabel('start')
                 .to(videoRef.current, { scale: 1.2, zIndex: 10 })

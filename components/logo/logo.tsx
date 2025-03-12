@@ -2,9 +2,9 @@
 
 import { useState, MouseEvent, useLayoutEffect } from "react";
 import Image from "next/image";
-import logo from "@/public/images/logo.png";
+import logo from "@/public/images/new-logo.png";
 import LogoDetails from "./logoDetails/logoDetails";
-// import pattern from '@/public/images/logoPattern.png'
+import pattern from '@/public/images/logoPattern.png'
 
 export default function Logo() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -134,7 +134,12 @@ export default function Logo() {
 
     return (
         <div className="relative w-full flex items-center justify-center px-6 pt-[92px] lg:px-[70px] z-30" onMouseMove={handleMouseMove}>
-            {/* <Image className="absolute w-full h-full object-fill " height={603} src={pattern} alt={""}></Image> */}
+            <Image
+                className=" opacity-80 absolute w-full object-cover gradient-mask-b-70"
+                height={603}
+                src={pattern}
+                alt={""}
+            />
             <canvas id="miCanvas" className="absolute w-full h-fit bg-transparent top-0 left-0 overflow-x-hidden z-10"></canvas>
             <div className=" hidden md:block absolute md:top-[20%] md:left-[5%] lg:left-[20%] z-30" style={getTransformStyle(-0.05, -0.05)}>
                 <LogoDetails text={textOptions[0]} backgroundColor="gold" />

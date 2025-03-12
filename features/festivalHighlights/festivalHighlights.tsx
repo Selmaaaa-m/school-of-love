@@ -65,9 +65,9 @@ export default function FestivalHighlights({ values }: Props) {
                     <FestivalInfoCard />
                     <FestivalInfoCard />
                     <FestivalInfoCard />
+                    {/* <FestivalInfoCard />
                     <FestivalInfoCard />
-                    <FestivalInfoCard />
-                    <FestivalInfoCard />
+                    <FestivalInfoCard /> */}
                 </div>
             </div>
         </div>

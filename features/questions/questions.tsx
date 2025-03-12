@@ -30,7 +30,7 @@ export default function Questions({ values }: Props) {
             <div className="flex flex-col md:flex-row h-fit w-full gap-20">
                 {values ? text.map((value, index) => (
                     <>
-                        <InnerHTML style="line font-normal !text-lg !text-justify" key={index} details={value || ""} />
+                        <InnerHTML style="line font-normal whitespace-break-spaces !text-lg !text-justify" key={index} details={value || ""} />
                     </>
                 )) :
                     <div className='w-full flex justify-center animate-pulse g-red-100' dir="ltr">

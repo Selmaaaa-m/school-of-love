@@ -27,7 +27,7 @@ export default function VideoPlayer({ video }: Props) {
                 .to('.festival-details', { opacity: 0 }, 'translate')
                 .addLabel('start')
                 .to(videoRef.current, { scale: 1.2, zIndex: 10 })
-                .to(videoRef.current, { translateY: '50%', top: '50%' })
+                // .to(videoRef.current, { translateY: '50%', top: '50%' })
                 .addLabel('end')
         }
     }, []);
@@ -40,7 +40,7 @@ export default function VideoPlayer({ video }: Props) {
             <video
                 controls
                 height="100%"
-                className="video rounded-xl bg-transparent z-30 md:w-full w-[90%]"
+                className="video rounded-xl bg-black z-30 md:w-full w-[90%]"
             >
                 <source src={fileUrl} type="video/mp4" />
                 Your browser does not support the video tag.

@@ -1,13 +1,19 @@
+import { useRef } from "react";
 import InnerHTML from "../innerHTML/innerHTML";
 import { TabsProps } from "./types";
 
 
 const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, setActiveTab, setFade }) => {
+    const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
     const handleTabClick = (index: number) => {
         setFade(true);
         setTimeout(() => {
             setActiveTab(index);
             setFade(false);
+            if (tabRefs.current[index]) {
+                tabRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            }
         }, 200); // Match the duration of the transition
     };
 
@@ -17,6 +23,9 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, setActiveTab, setFade }) =
                 {tabs.map((tab, index) => (
                     <button
                         key={index}
+                        ref={(el) => {
+                            tabRefs.current[index] = el;
+                        }}
                         className={`h-[60px] min-w-[205px] w-fit rounded-[30px] px-[23px] cursor-pointer flex items-center justify-center font-bold text-base/[28px] text-[#FFFFFF] border transition-colors duration-200
                             ${activeTab === index ?
                                 'bg-customGreen border-customGreen text-[#FFFFFF]'
@@ -24,8 +33,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, setActiveTab, setFade }) =
                             }`}
                         onClick={() => handleTabClick(index)}
                     >
-                        <InnerHTML style="w-fit h-fit text-center !cursor-pointer" details={tab.title || "" } />
-
+                        <InnerHTML style="w-fit h-fit text-center !cursor-pointer" details={tab.title || ""} />
                     </button>
                 ))}
             </div>

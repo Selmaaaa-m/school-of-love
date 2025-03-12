@@ -36,14 +36,14 @@ export default function CommentSection({ commentData, postId }: Props) {
         }
 
         try {
-            const response = await fetch( process.env.NEXT_PUBLIC_BASE_URL + '/api/v1/client/web/createComment', {
+            const response = await fetch( process.env.NEXT_PUBLIC_BASE_URL + '/api/v1/client/comment/createComment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     body: comment,
-                    postId: postId,
+                    id: postId,
                     parentId: 0,
                     name: name,
                     email: email,
@@ -94,7 +94,7 @@ export default function CommentSection({ commentData, postId }: Props) {
                     rows={1}
                 />
 
-                <div className="w-full mt-[30px] flex flex-row gap-10">
+                <div className="w-full mt-[30px] flex flex-col md:flex-row gap-10">
                     <input
                         type="text"
                         className="bg-transparent text-right f

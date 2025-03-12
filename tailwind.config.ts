@@ -19,7 +19,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [scrollbarHide],
+  plugins: [scrollbarHide, require("tailwind-gradient-mask-image")]
+
 };
 
 export default config;

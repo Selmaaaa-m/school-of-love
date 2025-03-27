@@ -1,6 +1,4 @@
-import { KeyValues } from "@/api/getPage";
-
 export interface Props{
 
-    video: KeyValues | undefined
+    video: string | undefined
 }

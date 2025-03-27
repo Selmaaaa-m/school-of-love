@@ -5,10 +5,9 @@ import InnerHTML from '@/components/innerHTML/innerHTML';
 
 export default function Festival({ values }: Props) {
 
-
     const festivalTitle = values?.data.keyValues.find(item => item.key === "festival-title");
     const festivalDetails = values?.data.keyValues.find(item => item.key === "festival-details");
-    const videoObject = values?.data.keyValues.find(item => item.id === 4)
+    const videoUrl = values?.data.keyValues.find(item => item.key === 'video')?.filesValue.url;
 
     return (
         <div className="w-full h-fit mt-[169px] flex flex-col items-center md:px-[80px] px-[30px]" >
@@ -19,7 +18,7 @@ export default function Festival({ values }: Props) {
 
                 </div>
 
-                <VideoPlayer video={videoObject} />
+                <VideoPlayer video={videoUrl} />
             </div>
         </div>
     );

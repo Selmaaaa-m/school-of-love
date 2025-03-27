@@ -3,8 +3,10 @@ export type GetPage = {
 }
 
 type FilesValue = {
+    file_name: string;
     url: string;
     key: string;
+    mimeType: string;
 };
 
 export type KeyValues = {
@@ -16,7 +18,7 @@ export type KeyValues = {
     createdAt: string;
     updatedAt: string;
     type: string;
-    filesValue: FilesValue[];
+    filesValue: FilesValue;
 };
 
 type Data = {

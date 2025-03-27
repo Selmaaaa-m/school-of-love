@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function VideoPlayer({ video }: Props) {
     const videoRef = useRef<HTMLDivElement | null>(null);
-    const fileUrl = video?.filesValue?.find(item => item.url)?.url;
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -43,11 +42,11 @@ export default function VideoPlayer({ video }: Props) {
         >
             <video
                 controls
-                width={"100%"}
+                width="100%"
                 height="100%"
                 className="video rounded-xl bg-black z-30"
             >
-                <source src={fileUrl} type="video/mp4" />
+                <source src={video} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
         </div>

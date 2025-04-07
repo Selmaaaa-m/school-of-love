@@ -29,9 +29,9 @@ export default function Questions({ values }: Props) {
             <InnerHTML style="text-[32px]/[56px]" details={questionsTitle?.value || ""} />
             <div className="flex flex-col md:flex-row h-fit w-full gap-20 md:gap-12 lg:gap-20">
                 {values ? text.map((value, index) => (
-                    <>
-                        <InnerHTML style="line font-normal whitespace-break-spaces !text-lg !text-justify" key={index} details={value || ""} />
-                    </>
+                    <div key={index} className="flex-1">
+                        <InnerHTML style="line font-normal whitespace-break-spaces !text-lg !text-justify" details={value || ""} />
+                    </div>
                 )) :
                     <div className='w-full flex justify-center animate-pulse g-red-100' dir="ltr">
                         loading ...

@@ -18,7 +18,7 @@
 }
 
 body {
-  color: var(--foreground);
+  color: white;
   background: var(--background);
   font-family: IRANYekanX;
   @apply text-white;

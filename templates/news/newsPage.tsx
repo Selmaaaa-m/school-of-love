@@ -20,10 +20,10 @@ export default function NewsPage({ newsData, commentData }: Data) {
 
     return (
         <>
-            <div className=" w-full px-[30px] md:px-[80px] lg:px-[142px] flex flex-col items-center justify-start">
+            <div className=" w-full px-[30px] md:px-[80px] lg:px-[142px] flex flex-col items-center !text-white justify-start">
                 <Topic title={newsData?.data.title || ''} date={date} commentCount={commentCount} detail={detail} />
                 <div>
-                    <InnerHTML style="text-base/[30px] whitespace-break-spaces !text-justify mt-[40px]" details={newsData?.data?.htmlCode || ""} />
+                    <InnerHTML style="text-base/[30px] whitespace-break-spaces !text-justify mt-[40px] !text-white " details={newsData?.data?.htmlCode || ""} />
                 </div>
 
                 <CommentSection commentData={commentData} postId={newsData?.data.id} />

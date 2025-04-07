@@ -4,20 +4,33 @@ import Comment from "@/components/comment/comment";
 import Alert from "@/components/alert/alert";
 import { Props } from "./types";
 import { convertToJalali } from "@/utils/dateUtils";
+import { GetComments } from "@/api/getCommentList";
 
-export default function CommentSection({ commentData, postId }: Props) {
+export default function CommentSection({ postId, slug }: Props) {
+    const [comments, setComments] = useState<GetComments | null>(null);
     const [comment, setComment] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [alertMessage, setAlertMessage] = useState("");
     const [alertType, setAlertType] = useState<"success" | "error">("error");
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const type = "POST"
 
-    const handleEmailInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        const filteredValue = value.replace(/[^a-zA-Z0-9._%+-@]/g, ''); // Only allow valid characters
-        setEmail(filteredValue);
-    };    
+    const fetchComments = async () => {
+        try {
+            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/v1/client/web/getCommentList/${type}/${slug}`);
+            const data = await response.json();
+            setComments(data);
+            console.log("omments: ", data);
+            
+        } catch (error) {
+            console.error("Error fetching comments:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchComments();
+    }, []);
 
     const handleSubmit = async () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -35,11 +48,9 @@ export default function CommentSection({ commentData, postId }: Props) {
         }
 
         try {
-            const response = await fetch( process.env.NEXT_PUBLIC_BASE_URL + '/api/v1/client/comment/createComment', {
+            const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/v1/client/comment/createComment', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     body: comment,
                     id: postId,
@@ -49,14 +60,16 @@ export default function CommentSection({ commentData, postId }: Props) {
                     type: 'POST'
                 }),
             });
-            
+
             if (response.ok) {
-                console.log("Comment submitted:", { comment, name, email });
                 setAlertMessage('دیدگاه شما با موفقیت ثبت شد');
                 setAlertType("success");
                 setComment("");
                 setName("");
                 setEmail("");
+
+                // Refetch comments to include the newly added one
+                fetchComments();
             } else {
                 setAlertMessage("مشکلی در ارسال دیدگاه به وجود آمده است.");
                 setAlertType("error");
@@ -67,13 +80,6 @@ export default function CommentSection({ commentData, postId }: Props) {
             setAlertType("error");
         }
     };
-
-    useEffect(() => {
-        if (textareaRef.current) {
-            textareaRef.current.style.height = "auto";
-            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-        }
-    }, [comment]);
 
     return (
         <div className="w-full g-red-900 flex flex-col justify-start items-center mt-[77px]" dir="rtl">
@@ -110,7 +116,7 @@ export default function CommentSection({ commentData, postId }: Props) {
                         alt="email"
                         dir="ltr"
                         value={email}
-                        onInput={handleEmailInput}
+                        onChange={(e) => setEmail(e.target.value)}
                         maxLength={100}
                     />
                     <button
@@ -124,16 +130,20 @@ export default function CommentSection({ commentData, postId }: Props) {
 
             {/* comments */}
             <div className="w-full mt-[140px] flex flex-col gap-10">
-                {
-                    commentData && commentData.data.comment.map(item => (
+                {comments?.data?.comment && comments.data.comment.length > 0 ? (
+                    comments.data.comment.map(item => (
                         <Comment
-                            name={item.name || item.firstname + ' ' + item.lastname}
+                            key={item.id} // Always provide a key when mapping elements
+                            name={item.name || `${item.firstname} ${item.lastname}`}
                             date={convertToJalali(item.createdAt)}
-                            content={item.body} />
-
+                            content={item.body}
+                        />
                     ))
-                }
+                ) : (
+                    <p className="text-center text-gray-500">هیچ دیدگاهی ثبت نشده است.</p>
+                )}
             </div>
+
 
             {alertMessage && <Alert message={alertMessage} onClose={() => setAlertMessage("")} type={alertType} />}
         </div>

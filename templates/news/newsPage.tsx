@@ -10,9 +10,10 @@ import InnerHTML from "@/components/innerHTML/innerHTML";
 export interface Data {
     newsData: GetPost | undefined
     commentData: GetComments | undefined
+    slug: string
 }
 
-export default function NewsPage({ newsData, commentData }: Data) {
+export default function NewsPage({ newsData, commentData, slug }: Data) {
 
     const date = newsData?.data.createdAt ? convertToJalali(newsData.data.createdAt) : '';
     const commentCount = commentData?.data.comment.length || 0;
@@ -26,7 +27,7 @@ export default function NewsPage({ newsData, commentData }: Data) {
                     <InnerHTML style="text-base/[30px] whitespace-break-spaces !text-justify mt-[40px] !text-white " details={newsData?.data?.htmlCode || ""} />
                 </div>
 
-                <CommentSection commentData={commentData} postId={newsData?.data.id} />
+                <CommentSection postId={newsData?.data.id} slug={slug} />
             </div>
             <Footer />
         </>

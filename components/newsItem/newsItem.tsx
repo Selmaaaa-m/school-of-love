@@ -13,7 +13,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ imageSrc, text, url, style }) => {
                     alt={text}
                     width={200}
                     height={280}
-                    className={`object-cover rounded-[15px] ${style}`}
+                    className={`object-cover rounded-[15px] ${style} bg-gray-700`}
                 />
 
                 {/* Overlay */}

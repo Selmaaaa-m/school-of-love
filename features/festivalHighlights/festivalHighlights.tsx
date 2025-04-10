@@ -60,11 +60,15 @@ export default function FestivalHighlights({ values }: Props) {
             <div className="races w-fit flex flex-row justify-center items-center pr-14">
                 <InnerHTML style='text-4xl text-right leading-[63px] min-w-[429px]' details={festivalTitle?.value || ''} />
                 <div className="w-fit flex flex-row gap-7 pl-15">
-                    <FestivalInfoCard />
-                    <FestivalInfoCard />
-                    <FestivalInfoCard />
-                    <FestivalInfoCard />
-                    <FestivalInfoCard />
+                    <FestivalInfoCard title='طلوع هشتم (افتتاحیه)' type={'video'} />
+                    <FestivalInfoCard title='مدیا جشنواره (آثار و تولیدات )' type={'image'} />
+                    <FestivalInfoCard title='دبیرخانه ملی (گزارش مصور از دبیرخانه هشتم)' type={'video'} />
+                    <FestivalInfoCard title='داوران جشنواره (بخش ملی)' type={'image'} />
+                    <FestivalInfoCard
+                        title='یارنما (نمایش اقدامات استان ها در جشنواره اعم از تولیدات - اقدامات -فعالیت ها )همراه با مانیتورینگ امتیازبندی' type={'video'}                    />
+                    <FestivalInfoCard
+                        title='تقویم جشنواره (زمانبندی جذب آثار داوری ها و انتخاب)' type={'video'}                    />
+                    <FestivalInfoCard title='ایستگاه هشتم (اختتامیه )' type={'video'} />
                 </div>
             </div>
         </div>

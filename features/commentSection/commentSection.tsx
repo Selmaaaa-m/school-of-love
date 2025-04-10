@@ -21,7 +21,6 @@ export default function CommentSection({ postId, slug }: Props) {
             const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/v1/client/web/getCommentList/${type}/${slug}`);
             const data = await response.json();
             setComments(data);
-            console.log("omments: ", data);
             
         } catch (error) {
             console.error("Error fetching comments:", error);

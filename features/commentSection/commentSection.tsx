@@ -4,7 +4,7 @@ import Comment from "@/components/comment/comment";
 import Alert from "@/components/alert/alert";
 import { Props } from "./types";
 import { convertToJalali } from "@/utils/dateUtils";
-import { GetComments } from "@/api/getCommentList";
+import { GetComments } from "@/api/types/getCommentList";
 
 export default function CommentSection({ postId, slug }: Props) {
     const [comments, setComments] = useState<GetComments | null>(null);

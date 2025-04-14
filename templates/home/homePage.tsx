@@ -6,15 +6,14 @@ import MainEvents from "@/features/mainEvents/mainEvents";
 import News from "@/features/news/news";
 import Questions from "@/features/questions/questions";
 import Supporters from "@/features/supporters/supporters";
-
-import { GetPage } from "@/api/getPage"
-import { GetPostList } from "@/api/getPostList";
+import { GetPage } from "@/api/types/getPage"
+import { GetPostList } from "@/api/types/getPostList";
 
 export interface Props {
     data: GetPage | undefined;
 }
 
-export default async function HomePage({ data }: Props) {
+export default async function HomePage() {
 
     let postListData = undefined
 
@@ -41,18 +40,15 @@ export default async function HomePage({ data }: Props) {
         console.error(err)
     }
 
-    const pageData = data;
-
-
     return (
         <>
             <Logo />
-            <Questions values={pageData || undefined} />
-            <Festival values={pageData || undefined} />
-            <FestivalHighlights values={pageData || undefined} />
-            <MainEvents values={pageData || undefined} />
-            <Supporters values={pageData || undefined} />
-            <News values={pageData || undefined} newsList={postListData || undefined} />
+            <Questions />
+            <Festival />
+            <FestivalHighlights />
+            <MainEvents />
+            <Supporters />
+            <News newsList={postListData || undefined} />
             <Footer />
         </>
     );

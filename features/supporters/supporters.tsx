@@ -1,12 +1,19 @@
+'use client'
+import { fetchHomeData } from "@/api/home/fetchHomeData";
 import InnerHTML from "@/components/innerHTML/innerHTML";
-import { Props } from "./types";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 
-export default function Supporters({ values }: Props) {
-    const supportersTitle = values?.data.keyValues.find(item => item.key === 'supporters-title');
-    const supporter1 = values?.data.keyValues.find(item => item.key === 'supporter-1');
-    const supporter2 = values?.data.keyValues.find(item => item.key === 'supporter-2');
+export default function Supporters() {
+    const { data: pageData } = useQuery({
+        queryKey: ["pageData"],
+        queryFn: () => fetchHomeData(),
+    });
     
+    const supportersTitle = pageData?.data.keyValues.find(item => item.key === 'supporters-title');
+    const supporter1 = pageData?.data.keyValues.find(item => item.key === 'supporter-1');
+    const supporter2 = pageData?.data.keyValues.find(item => item.key === 'supporter-2');
+
 
     return (
         <div className="w-full mt-[267px] text-center" dir="rtl">

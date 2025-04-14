@@ -3,8 +3,8 @@ import CommentSection from "@/features/commentSection/commentSection";
 import Footer from "@/features/footer/footer";
 import { convertToJalali } from "@/utils/dateUtils";
 
-import { GetPost } from "@/api/getPost";
-import { GetComments } from "@/api/getCommentList";
+import { GetPost } from "@/api/types/getPost";
+import { GetComments } from "@/api/types/getCommentList";
 import InnerHTML from "@/components/innerHTML/innerHTML";
 
 export interface Data {
@@ -29,7 +29,7 @@ export default function NewsPage({ newsData, commentData, slug }: Data) {
 
                 <CommentSection postId={newsData?.data.id} slug={slug} />
             </div>
-            <Footer />
+            <Footer/>
         </>
     );
 }

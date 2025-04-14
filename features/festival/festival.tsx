@@ -1,13 +1,20 @@
-import React from 'react';
+ 'use client'
+ import React from 'react';
 import VideoPlayer from '../../components/videoPlayer/videoPlayer';
-import { Props } from './types';
 import InnerHTML from '@/components/innerHTML/innerHTML';
+import { fetchHomeData } from '@/api/home/fetchHomeData';
+import { useQuery } from '@tanstack/react-query';
 
-export default function Festival({ values }: Props) {
+export default function Festival() {
 
-    const festivalTitle = values?.data.keyValues.find(item => item.key === "festival-title");
-    const festivalDetails = values?.data.keyValues.find(item => item.key === "festival-details");
-    const videoUrl = values?.data.keyValues.find(item => item.key === 'video')?.filesValue.url;
+    const { data: pageData } = useQuery({
+        queryKey: ["pageData"],
+        queryFn: () => fetchHomeData(),
+    });
+    
+    const festivalTitle = pageData?.data.keyValues.find(item => item.key === "festival-title");
+    const festivalDetails = pageData?.data.keyValues.find(item => item.key === "festival-details");
+    const videoUrl = pageData?.data.keyValues.find(item => item.key === 'video')?.filesValue.url;
 
     return (
         <div className="w-full h-fit mt-[169px] flex flex-col items-center md:px-[80px] px-[30px]" >

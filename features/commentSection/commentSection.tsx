@@ -4,7 +4,7 @@ import Comment from "@/components/comment/comment";
 import Alert from "@/components/alert/alert";
 import { Props } from "./types";
 import { convertToJalali } from "@/utils/dateUtils";
-import { GetComments } from "@/api/types/getCommentList";
+import { GetComments } from "@/api/getCommentList";
 
 export default function CommentSection({ postId, slug }: Props) {
     const [comments, setComments] = useState<GetComments | null>(null);
@@ -21,7 +21,6 @@ export default function CommentSection({ postId, slug }: Props) {
             const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/v1/client/web/getCommentList/${type}/${slug}`);
             const data = await response.json();
             setComments(data);
-            
         } catch (error) {
             console.error("Error fetching comments:", error);
         }

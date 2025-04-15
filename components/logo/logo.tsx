@@ -157,7 +157,7 @@ export default function Logo() {
             <div className=" hidden md:block absolute md:bottom-[30%] md:left-[15%] lg:left-[30%] z-30" style={getTransformStyle(-0.05, 0.05)}>
                 <LogoDetails text={textOptions[2]} backgroundColor="yellow" />
             </div>
-            <div className=" hidden md:block absolute md:bottom-[10%] md:right-[5%] lg:right-[20%] z-30" style={getTransformStyle(0.05, 0.05)}>
+            <div className=" hidden md:block absolute md:bottom-[10%] md:right-[5%] lg:right-[23%] z-30" style={getTransformStyle(0.05, 0.05)}>
                 <LogoDetails text={textOptions[3]} backgroundColor="gold" />
             </div>
         </div>

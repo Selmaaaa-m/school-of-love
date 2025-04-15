@@ -1,5 +1,5 @@
-import { GetComments } from "@/api/types/getCommentList";
-import { GetPost } from "@/api/types/getPost";
+import { GetComments } from "@/api/getCommentList";
+import { GetPost } from "@/api/getPost";
 import NewsPage from "@/templates/news/newsPage";
 
 

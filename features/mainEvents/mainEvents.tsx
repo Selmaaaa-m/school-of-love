@@ -1,27 +1,21 @@
 "use client";
 import { useState } from 'react';
 import Tabs from "@/components/tabs/tabs";
-import { Tab } from './types';
+import { Props, Tab } from './types';
 import InnerHTML from '@/components/innerHTML/innerHTML';
-import { fetchHomeData } from '@/api/home/fetchHomeData';
-import { useQuery } from '@tanstack/react-query';
 
-export default function MainEvents() {
-    const { data: pageData } = useQuery({
-        queryKey: ["pageData"],
-        queryFn: () => fetchHomeData(),
-    });
+export default function MainEvents({ values }: Props) {
     const [activeTab, setActiveTab] = useState(0);
     const [fade, setFade] = useState(false);
 
-    const eventsTitle = pageData?.data.keyValues.find(item => item.key === 'main-events-title');
-    const tab1Title = pageData?.data.keyValues.find(item => item.key === 'main-events-tab1-title');
-    const tab1Detail = pageData?.data.keyValues.find(item => item.key === 'main-events-tab1-details');
-    const tab2Title = pageData?.data.keyValues.find(item => item.key === 'main-events-tab2');
-    const tab2Detail = pageData?.data.keyValues.find(item => item.key === 'main-events-tab2-details');
-    const tab3Title = pageData?.data.keyValues.find(item => item.key === 'main-events-tab3');
-    const tab3Detail = pageData?.data.keyValues.find(item => item.key === 'main-events-tab3-details');
-    const tabsNotice = pageData?.data.keyValues.find(item => item.key === 'tabs-notice');
+    const eventsTitle = values?.data.keyValues.find(item => item.key === 'main-events-title');
+    const tab1Title = values?.data.keyValues.find(item => item.key === 'main-events-tab1-title');
+    const tab1Detail = values?.data.keyValues.find(item => item.key === 'main-events-tab1-details');
+    const tab2Title = values?.data.keyValues.find(item => item.key === 'main-events-tab2');
+    const tab2Detail = values?.data.keyValues.find(item => item.key === 'main-events-tab2-details');
+    const tab3Title = values?.data.keyValues.find(item => item.key === 'main-events-tab3');
+    const tab3Detail = values?.data.keyValues.find(item => item.key === 'main-events-tab3-details');
+    const tabsNotice = values?.data.keyValues.find(item => item.key === 'tabs-notice');
 
 
     const tabs: Tab[] = [

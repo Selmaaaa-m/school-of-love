@@ -6,14 +6,15 @@ import MainEvents from "@/features/mainEvents/mainEvents";
 import News from "@/features/news/news";
 import Questions from "@/features/questions/questions";
 import Supporters from "@/features/supporters/supporters";
-import { GetPage } from "@/api/types/getPage"
-import { GetPostList } from "@/api/types/getPostList";
+
+import { GetPage } from "@/api/getPage"
+import { GetPostList } from "@/api/getPostList";
 
 export interface Props {
     data: GetPage | undefined;
 }
 
-export default async function HomePage() {
+export default async function HomePage({ data }: Props) {
 
     let postListData = undefined
 
@@ -34,21 +35,23 @@ export default async function HomePage() {
             throw new Error("Network response was not ok");
         }
         postListData = await response.json() as GetPostList;
-
+        
 
     } catch (err) {
         console.error(err)
     }
 
+    const pageData = data;
+
     return (
         <>
             <Logo />
-            <Questions />
-            <Festival />
-            <FestivalHighlights />
-            <MainEvents />
-            <Supporters />
-            <News newsList={postListData || undefined} />
+            <Questions values={pageData || undefined} />
+            <Festival values={pageData || undefined} />
+            <FestivalHighlights values={pageData || undefined} />
+            <MainEvents values={pageData || undefined} />
+            <Supporters values={pageData || undefined} />
+            <News values={pageData || undefined} newsList={postListData || undefined} />
             <Footer />
         </>
     );
